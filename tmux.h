@@ -387,6 +387,7 @@ enum tty_code_code {
 	TTYC_VPA,	/* row_address, cv */
 	TTYC_XENL,	/* eat_newline_glitch, xn */
 	TTYC_XT,	/* xterm(1)-compatible title, XT */
+	TTYC_TC,	/* 24-bit "true" colour, Tc */
 };
 
 /* Message codes. */
@@ -628,6 +629,8 @@ struct utf8_data {
 #define GRID_FLAG_FG256 0x1
 #define GRID_FLAG_BG256 0x2
 #define GRID_FLAG_PADDING 0x4
+#define GRID_FLAG_FGRGB 0x8
+#define GRID_FLAG_BGRGB 0x10
 
 /* Grid line flags. */
 #define GRID_LINE_WRAPPED 0x1
@@ -636,8 +639,18 @@ struct utf8_data {
 struct grid_cell {
 	u_char	attr;
 	u_char	flags;
-	u_char	fg;
-	u_char	bg;
+	union {
+		u_char				fg;
+		struct grid_cell_colour_rgb {
+			u_char	r;
+			u_char	g;
+			u_char	b;
+		} 				fg_rgb;
+	};
+	union {
+		u_char				bg;
+		struct grid_cell_colour_rgb	bg_rgb;
+	};
 
 	u_char	xstate; /* top 4 bits width, bottom 4 bits size */
 	u_char	xdata[UTF8_SIZE];
