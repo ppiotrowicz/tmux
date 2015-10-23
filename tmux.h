@@ -636,7 +636,7 @@ struct utf8_data {
 #define GRID_LINE_WRAPPED 0x1
 
 /* Grid cell RGB colours. */
-struct grid_cell_colour_rgb {
+struct grid_cell_rgb {
 	u_char	r;
 	u_char	g;
 	u_char	b;
@@ -647,12 +647,12 @@ struct grid_cell {
 	u_char	attr;
 	u_char	flags;
 	union {
-		u_char				fg;
-		struct grid_cell_colour_rgb	fg_rgb;
+		u_char			fg;
+		struct grid_cell_rgb	fg_rgb;
 	};
 	union {
-		u_char				bg;
-		struct grid_cell_colour_rgb	bg_rgb;
+		u_char			bg;
+		struct grid_cell_rgb	bg_rgb;
 	};
 
 	u_char	xstate; /* top 4 bits width, bottom 4 bits size */
