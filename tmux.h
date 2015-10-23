@@ -635,17 +635,20 @@ struct utf8_data {
 /* Grid line flags. */
 #define GRID_LINE_WRAPPED 0x1
 
+/* Grid cell RGB colours. */
+struct grid_cell_colour_rgb {
+	u_char	r;
+	u_char	g;
+	u_char	b;
+};
+
 /* Grid cell data. */
 struct grid_cell {
 	u_char	attr;
 	u_char	flags;
 	union {
 		u_char				fg;
-		struct grid_cell_colour_rgb {
-			u_char	r;
-			u_char	g;
-			u_char	b;
-		} 				fg_rgb;
+		struct grid_cell_colour_rgb	fg_rgb;
 	};
 	union {
 		u_char				bg;
