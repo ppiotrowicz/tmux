@@ -56,8 +56,6 @@ alerts_callback(__unused int fd, __unused short events, __unused void *arg)
 
 	RB_FOREACH(w, windows, &windows) {
 		RB_FOREACH(s, sessions, &sessions) {
-			if (s->flags & SESSION_UNATTACHED)
-				continue;
 			RB_FOREACH(wl, winlinks, &s->windows) {
 				if (wl->window != w)
 					continue;
